@@ -5,3 +5,6 @@
 !mws
 !docker
 !vmmanager
+!tox.ini
+!setup.py
+!doc

@@ -26,11 +26,9 @@ COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy MWS webapp
 COPY mws /usr/src/app
-
-# Add volumes to allow overriding container contents with local directories for
-# development.
-VOLUME ["/usr/src/app"]
-VOLUME ["/usr/src/vmmanager"]
+COPY tox.ini /usr/src/app/tox.ini
+COPY setup.py /usr/src/app/setup.py
+COPY doc /usr/src/app/doc
 
 # Environment variables to override Django settings module and default database
 # configuration. Note: at least DJANGO_DB_PASSWORD should be set.
