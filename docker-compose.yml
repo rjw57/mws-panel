@@ -10,9 +10,6 @@ services:
     links:
       - "db"
       - "debugsmtp"
-    volumes:
-      - ./mws/:/usr/src/app
-      - ./vmmanager/:/usr/src/vmmanager
     environment:
       - DJANGO_SETTINGS_MODULE=mws.settings_developer
       - DJANGO_DB_PASSWORD=databasePass
@@ -22,6 +19,10 @@ services:
     <<: *devel
     entrypoint: ["wait-for-it", "db:5432", "-t", "5", "--"]
     command: ["./manage.py", "runserver", "0.0.0.0:80"]
+  tox:
+    <<: *devel
+    entrypoint: ["tox"]
+    command: [""]
   db:
     image: postgres
     environment:
