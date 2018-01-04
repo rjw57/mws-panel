@@ -18,14 +18,5 @@ env:
     - DJANGO_DB_USER=postgres
     - DJANGO_DB_PASSWORD=mysecret
 
-# Pull and launch the postgres database container.
-before_install:
-  - docker pull postgres:9.6
-  - docker run -d -P -e POSTGRES_PASSWORD=$DJANGO_DB_PASSWORD postgres:9.6
-  - docker ps -a
-
-install:
-  - pip install tox
-
 script:
-  - tox
+  - docker-compose up tox
